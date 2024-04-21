@@ -37,7 +37,7 @@ export default function Landing() {
                     </div>
                     <div className="hidden lg:flex lg:gap-x-12">
                         {navigation.map((item) => (
-                            <Link to="contacto">
+                            <Link to="translate">
                                 <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
                                     {item.name}
                                 </a>
@@ -46,7 +46,7 @@ export default function Landing() {
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                         <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-                           Translate <span aria-hidden="true">&rarr;</span>
+                            Translate <span aria-hidden="true">&rarr;</span>
                         </a>
                     </div>
                 </nav>
@@ -110,18 +110,20 @@ export default function Landing() {
                 <div className="mx-auto max-w-2xl py-20 sm:py-42 lg:py-50">
                     <div className="text-center">
                         <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                           English Gateway
+                            English Gateway
                         </h1>
                         <p className="mt-6 text-lg leading-8 text-gray-600">
-                        Experience seamless language translation with English Gateway. Translate text or images into English with a simple click. Perfect for travelers, students, or anyone navigating a multi-language world. 
+                            Experience seamless language translation with English Gateway. Translate text or images into English with a simple click. Perfect for travelers, students, or anyone navigating a multi-language world.
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
-                            <a
-                                href="#"
-                                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                            >
-                                Let's Translate
-                            </a>
+                            <Link to="translate">
+                                <a
+                                    href="#"
+                                    className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                >
+                                    Let's Translate
+                                </a>
+                            </Link>
                             <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
                                 Learn more <span aria-hidden="true">→</span>
                             </a>
