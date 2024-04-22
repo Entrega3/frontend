@@ -1,7 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react';
 import "../../styles/translatestyles.css"
+import axios from 'axios';
 
 function Translate() {
+
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [textImg, setTextImg] = useState('')
+    const [translationImg, setTranslationImg] = useState('')
+    const handleFileChange = async (event) => {
+        const file = event.target.files[0];
+        setSelectedFile(file);
+
+        try {
+            await handleSubmit(file);
+        } catch (error) {
+            console.error('Error handling file:', error);
+        }
+    };
+
+    const handleSubmit = async (file) => {
+        if (!file) {
+            console.error('No file selected');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+            const response = await axios.post('http://localhost:3001/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            const {text, translation} = response.data
+            setTextImg(text)
+            setTranslationImg(translation)
+            console.log(textImg, translationImg)
+
+            // Aquí puedes manejar la respuesta del backend, como actualizar el estado con el texto traducido.
+        } catch (error) {
+            console.error('Error sending file to backend:', error);
+        }
+    };
+
     return (
         <div class="root-translate">
             <body class="translate">
@@ -36,6 +78,7 @@ function Translate() {
                                 id="input-text"
                                 cols="30"
                                 rows="10"
+                                value={textImg}
                                 placeholder="Enter your text here"
                             ></textarea>
                             <div class="chars"><span id="input-chars">0</span> / 5000</div>
@@ -45,7 +88,7 @@ function Translate() {
                             <label for="upload-document">
                                 <span id="upload-title">Choose File</span>
                                 <ion-icon name="cloud-upload-outline"></ion-icon>
-                                <input type="file" id="upload-document" hidden />
+                                <input onChange={handleFileChange} type="file" id="upload-document" hidden />
                             </label>
                         </div>
                     </div>
@@ -75,6 +118,7 @@ function Translate() {
                             id="output-text"
                             cols="30"
                             rows="10"
+                            value={translationImg}
                             placeholder="Translated text will appear here"
                             disabled
                         ></textarea>
