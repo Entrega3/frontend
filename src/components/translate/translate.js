@@ -158,10 +158,10 @@ function Translate() {
                         </div>
                         <div class="card-bottom">
                             <p>Or choose your image!</p>
-                            <label for="upload-document">
+                            <label htmlFor="upload-document">
                                 <span id="upload-title">Choose File</span>
                                 <ion-icon name="cloud-upload-outline"></ion-icon>
-                                <input onChange={handleFileChange} type="file" id="upload-document" hidden />
+                                <input onChange={handleFileChange} type="file" id="upload-document" hidden accept="image/*" />
                             </label>
                             <button onClick={handleCameraCapture}>
                                 <span>Take Photo</span>
@@ -182,7 +182,7 @@ function Translate() {
                             <div class="dropdown-container" id="output-language">
                                 <div class="dropdown-toggle">
                                     <ion-icon name="globe-outline"></ion-icon>
-                                    <span class="selected" data-value="en">Español</span>
+                                    <span class="selected" data-value="es">Spanish</span>
                                     <ion-icon name="chevron-down-outline"></ion-icon>
                                 </div>
                                 <ul class="dropdown-menu">
