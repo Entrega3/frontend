@@ -70,42 +70,31 @@ function Translate() {
         }
     };
 
-    const handleCameraCapture = async () => {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    const handleCameraCapture = () => {
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*';
+        fileInput.capture = 'camera';
     
-            const video = document.createElement('video');
-            document.body.appendChild(video);
-            video.srcObject = stream;
-            video.play();
+        fileInput.onchange = async (event) => {
+            const file = event.target.files[0];
     
-            video.onended = () => {
-                stream.getTracks().forEach(track => track.stop());
-                document.body.removeChild(video);
-            };
+            if (file) {
+                try {
+                    await handleSubmit(file);
     
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-    
-            const context = canvas.getContext('2d');
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    
-            const dataURI = canvas.toDataURL('image/jpeg');
-            const blob = await (await fetch(dataURI)).blob();
-    
-            const file = new File([blob], 'photo.jpg', { type: 'image/jpeg' });
-    
-            await handleSubmit(file);
-    
-            const fileInput = document.getElementById('upload-document');
-            if (fileInput) {
-                fileInput.value = null;
+                    if (fileInput) {
+                        fileInput.value = null;
+                    }
+                } catch (error) {
+                    console.error('Error handling camera capture:', error);
+                }
             }
-        } catch (error) {
-            console.error('Error capturing photo:', error);
-        }
-    };
+        };
+    
+        fileInput.click();
+    };    
+
     
 
     const handleClearText = () => {
@@ -182,8 +171,8 @@ function Translate() {
                             <div class="dropdown-container" id="output-language">
                                 <div class="dropdown-toggle">
                                     <ion-icon name="globe-outline"></ion-icon>
-                                    <span class="selected" data-value="es">Spanish</span>
-                                    <ion-icon name="chevron-down-outline"></ion-icon>
+                                    <span class="selected" data-value="es">English</span>
+                                    {/* <ion-icon name="chevron-down-outline"></ion-icon> */}
                                 </div>
                                 <ul class="dropdown-menu">
                                     <li class="option active">DropDown Menu Item 1</li>
