@@ -32,7 +32,7 @@ function Translate() {
 
         console.log("holi",manualText)
         try {
-            const response = await axios.post('http://localhost:3001/translate', {
+            const response = await axios.post('https://google-vision-thqf.onrender.com/translate', {
                 text: manualText
             });
             
@@ -54,7 +54,7 @@ function Translate() {
         formData.append('image', file);
 
         try {
-            const response = await axios.post('http://localhost:3001/upload', formData, {
+            const response = await axios.post('https://google-vision-thqf.onrender.com/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
